@@ -3,7 +3,7 @@ from rest_framework import generics, permissions, viewsets
 from django.contrib.auth.models import User, Group
 from serializers import UserSerializer, GroupSerializer
 
-from bluepomos.permissions import IsOwnerUserToo
+from app.permissions import IsOwnerUserToo
 
 
 

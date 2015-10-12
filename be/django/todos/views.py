@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from todos.models import Todo, Pomodoro
 from todos.serializers import TodoSerializer, PomodoroSerializer
 
-from bluepomos.permissions import IsOwnerOrReadOnly, IsOwnerOnly
+from app.permissions import IsOwnerOrReadOnly, IsOwnerOnly
 
 import datetime
 

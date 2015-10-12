@@ -117,8 +117,7 @@ JWT_AUTH = {
 
 
 CORS_ORIGIN_WHITELIST = (
-    'localhost:3001',
-    'localhost:8001',
+    'localhost:3000',
     'blue-todo.appspot.com'
 )
 
