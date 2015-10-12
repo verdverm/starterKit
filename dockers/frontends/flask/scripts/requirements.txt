@@ -1,0 +1,5 @@
+mailchimp
+
+cssmin
+flask-assets
+flask-babel

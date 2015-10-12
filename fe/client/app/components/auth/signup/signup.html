@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="card">
+		<div class="card-content container">
+		    <span class="card-title black-text">Signup</span>
+				<div class="input-field">
+		          <input placeholder="Username" type="text" class="validate" ref="usernameInput" required/>
+		        </div>
+				<div class="input-field">
+		          <input placeholder="Email" type="email" class="validate" ref="usernameInput" required/>
+		        </div>
+				<div class="input-field">
+		          <input placeholder="Password" type="password" class="validate" ref="passwordInput" required/>
+		        </div>
+				<div class="input-field">
+		          <input placeholder="Password Confirm" type="password" class="validate" ref="confirmInput" required/>
+		        </div>
+		        <input type="submit" hidden/>
+		</div>
+		<div class="card-action">
+			<a ng-click="vm.signup()">Signup</a>
+			<a ui-sref="login" class="right">Login</a>
+		</div>
+	</div>
+</div>	

@@ -1,0 +1,6 @@
+flask
+
+ipython[notebook]
+
+librosa 
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Pomodoro Todo App</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="./src/vendor/angular-material.css" />
+    <link rel="stylesheet" href="./assets/app.css" />
+</head>
+
+<body ng-app="pomodoroTodoApp" ng-controller="MenuController as menuCtrl" layout="column" layout-fill>
+
+    <md-toolbar layout="row" class="md-whiteframe-z2 md-primary md-hue-2">
+        <md-button ng-show="menuCtrl.showLogout" class="menu" hide-gt-lg hm-tap="menuCtrl.toggleMenu()" aria-label="Show User List">
+            <ng-md-icon icon="menu" style="fill: #DEEBF8;"></ng-md-icon>
+        </md-button>
+        <h1>Pomodoro Todo App</h1>
+    </md-toolbar>
+
+
+    <div flex layout="row">
+
+        <md-sidenav ng-show="menuCtrl.showLogout" class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-lg')" layout="column" flex>
+            <md-toolbar class="md-whiteframe-z1">
+                <h1>Menu</h1>
+            </md-toolbar>
+            <md-list>
+                <md-list-item ng-click="menuCtrl.gotoHome();" layout="row" layout-align="start center">
+                    <ng-md-icon icon="home"></ng-md-icon>
+                    Home
+                </md-list-item>
+
+                <md-list-item ng-click="menuCtrl.gotoTodos();" layout="row" layout-align="start center">
+                    <ng-md-icon icon="assignment"></ng-md-icon>
+                    Your Todos
+                </md-list-item>
+
+                <md-divider></md-divider>
+
+                <md-list-item ng-click="menuCtrl.logout();" layout="row" layout-align="start center">
+                    <ng-md-icon icon="logout"></ng-md-icon>
+                    Logout
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+
+        <md-content flex md-scroll-y>
+            <div ui-view>
+                <!-- Content is loaded from partials templates -->
+            </div>
+        </md-content>
+
+    </div>
+
+    <!-- angular sources -->
+    <script src="./src/vendor/angular.js"></script>
+    <script src="./src/vendor/angular-ui-router.js"></script>
+    <script src="./src/vendor/angular-animate.js"></script>
+    <script src="./src/vendor/angular-aria.js"></script>
+    <script src="./src/vendor/angular-material.js"></script>
+    <script src="./src/vendor/angular-material-icons.js"></script>
+    <script src="./src/vendor/angular-touch.js"></script>
+    <script src="./src/vendor/hammer.min.js"></script>
+    <script src="./src/vendor/angular.hammer.min.js"></script>
+    <!-- other vendor sources -->
+    <script src="./src/vendor/sklad.js"></script>
+    <script src="./src/vendor/howler.min.js"></script>
+
+    <!-- app sources -->
+    <script src="./src/js/app.js"></script>
+    <script src="./src/js/routes.js"></script>
+    <script src="./src/js/indexdb.js"></script>
+    <script src="./src/js/clickbuster.js"></script>
+
+    <script src="./src/auth/service/auth_manager.js"></script>
+    <script src="./src/auth/controllers/login.js"></script>
+    <script src="./src/auth/controllers/register.js"></script>
+
+    <script src="./src/js/controllers/menu.js"></script>
+
+    <script src="./src/todos/services/todo-service.js"></script>
+    <script src="./src/todos/controllers/todo-list.js"></script>
+    <script src="./src/todos/directives/todo-item/todo-item.js"></script>
+
+</body>
+
+</html>

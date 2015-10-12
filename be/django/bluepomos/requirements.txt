@@ -1,0 +1,12 @@
+django
+django-filter
+django-guardian
+djangorestframework
+djangorestframework-jwt
+django-rest-auth
+django-allauth
+django-cors-headers
+
+aldjemy
+werkzeug
+psycopg2

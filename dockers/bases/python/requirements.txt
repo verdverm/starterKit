@@ -1,0 +1,22 @@
+# general
+cython
+
+
+# SQL orm
+sqlalchemy
+sqlalchemy-migrate
+
+# postgres
+psycopg2
+
+# couchdb
+couchdb
+
+# neo4j orm
+bulbs 
+
+# redis
+redis
+
+# rabbitmq
+pika

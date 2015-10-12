@@ -1,0 +1,12 @@
+PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
+
+alias egrep="egrep --color=auto --line-buffered"
+
+alias u="cd .. "
+alias x="exit "
+
+alias du1="du --max-depth=1 -h "
+alias du2="du --max-depth=2 -h "
+alias psg="ps aux | grep "
+
+alias hist="history | grep "

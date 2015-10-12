@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>App Title</title>
+    <meta name="viewport" content="width=device-width initial-scale=1 maximum-scale=1 user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="description" content="App Description">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+
+    <base href="/">
+</head>
+
+<body ng-app="app" ng-cloak>
+
+    <app>
+        Loading...
+    </app>
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+
+    <script src="bundle.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.button-collapse').sideNav({
+                menuWidth: 240, // Default is 240
+                edge: 'right', // Choose the horizontal origin
+                closeOnClick: true // Closes side-nav on <a> clicks
+            });
+
+            $('.state-collapse').sideNav({
+                menuWidth: 400, // Default is 240
+                edge: 'left', // Choose the horizontal origin
+                closeOnClick: true // Closes side-nav on <a> clicks
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

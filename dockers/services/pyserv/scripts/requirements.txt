@@ -1,0 +1,14 @@
+tornado
+flask
+flask-sqlalchemy
+flask-migrate
+alembic
+
+flask-security
+flask-login
+flask-bcrypt
+flask-principal
+flask-admin
+
+flask-uploads
+flask-mail

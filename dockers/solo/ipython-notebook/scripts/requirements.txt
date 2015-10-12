@@ -1,0 +1,3 @@
+ipython[notebook]
+
+# add others that you see fit by extending this docker

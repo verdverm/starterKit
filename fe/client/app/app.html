@@ -1,0 +1,40 @@
+<!-- Place all UI elements intended to be present across all routes in this file -->
+<div class="app">
+
+    <nav>
+        <div class="nav-wrapper blue">
+            <a href="#" data-activates="state-view" class="left state-collapse"><i class="material-icons">info</i></a>
+
+            <a href="/" class="brand-logo">Logo</a>
+            <a href="#" data-activates="mobile-demo" class="right button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a ui-sref="home">Home</a></li>
+                <li><a ui-sref="about">About</a></li>
+
+                <li><a ng-hide="vm.auth.authed" ui-sref="signup">Signup</a></li>
+                <li><a ng-hide="vm.auth.authed" ui-sref="login">Login</a></li>
+                
+                <li><a ng-show="vm.auth.authed" ui-sref="profile">Profile</a></li>
+                <li><a ng-show="vm.auth.authed" ui-sref="logout">Logout</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li><a ui-sref="home">Home</a></li>
+                <li><a ui-sref="about">About</a></li>
+
+                <li><a ng-hide="vm.auth.authed" ui-sref="signup">Signup</a></li>
+                <li><a ng-hide="vm.auth.authed" ui-sref="login">Login</a></li>
+                
+                <li><a ng-show="vm.auth.authed" ui-sref="profile">Profile</a></li>
+                <li><a ng-show="vm.auth.authed" ui-sref="logout">Logout</a></li>
+            </ul>
+
+            <div id="state-view" class="black white-text side-nav">
+                <pre>{{ vm.globalState | json }}</pre>
+                <pre>{{ vm.auth | json }}</pre>
+            </div>
+
+        </div>
+    </nav>
+
+    <div ui-view></div>
+</div>

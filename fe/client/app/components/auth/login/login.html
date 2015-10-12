@@ -1,0 +1,23 @@
+<div class="container">
+	<div class="card">
+		<div class="card-content container">
+		    <span class="card-title black-text">Login</span>
+				<div class="input-field">
+		          <input placeholder="Username" type="text" class="validate" ng-model="vm.creds.username" required/>
+		        </div>
+				<div class="input-field">
+		          <input placeholder="Password" type="password" class="validate" ng-model="vm.creds.password" required/>
+		        </div>
+		        <input type="submit" hidden/>
+		</div>
+		<div class="card-action">
+			<a ng-click="vm.tryLogin()">Login</a>
+			<a ui-sref="signup" class="right">Signup</a>
+		</div>
+	</div>
+
+	<div class="center">
+		<span><a href="#forgot">forgot password</a></span>
+	</div>	
+</div>	
+

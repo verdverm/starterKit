@@ -1,0 +1,24 @@
+requests
+beautifulsoup
+scrapy
+
+pandas
+numpy
+scipy
+scikit-learn
+scikit-image
+
+ipython[all]
+matplotlib
+
+# HDFS
+h5py
+
+# large graphs
+networkx
+
+# geo-data
+pyshp
+
+# NLP
+nltk
