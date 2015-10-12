@@ -152,7 +152,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'bluepomos.urls'
+ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [
     {
@@ -173,7 +173,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bluepomos.wsgi.application'
+WSGI_APPLICATION = 'app.wsgi.application'
 
 
 # Database
