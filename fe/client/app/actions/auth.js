@@ -31,6 +31,31 @@ export function registerUser(username,email,password) {
 	};
 }
 
+export const LOADED_USER_AUTH = 'LOADED_USER_AUTH';
+export function loadedUserAuth(username, uid, token, rev) {
+	return {
+		type: LOADED_USER_AUTH,
+		username,
+		token,
+		uid,
+		rev
+	}
+}
+
+export const LOADED_USER_AUTH_BEGIN = 'LOADED_USER_AUTH_BEGIN';
+export function loadedUserAuthBegin() {
+	return {
+		type: LOADED_USER_AUTH_BEGIN,
+	}
+}
+export const LOADED_USER_AUTH_FAIL = 'LOADED_USER_AUTH_FAIL';
+export function loadedUserAuthFail(error) {
+	return {
+		type: LOADED_USER_AUTH_FAIL,
+		error
+	}
+}
+
 export function loginUser(username,password) {
 	return function (dispatch) {
 
@@ -49,6 +74,7 @@ export function loginUser(username,password) {
 			cache: false,
 			success: function(resp) {
 				console.log("Logged in: ", resp)
+
 				dispatch(loginUserSuccess(username,resp.token))
 				dispatch(routerActions.stateGo('profile'))
 			}.bind(this),

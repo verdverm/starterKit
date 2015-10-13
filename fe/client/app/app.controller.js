@@ -11,8 +11,7 @@ class AppController {
 
     mapStateToThis(state) {
         return {
-            globalState: state,
-            auth: state.auth
+            globalState: state
         };
     }
 }
