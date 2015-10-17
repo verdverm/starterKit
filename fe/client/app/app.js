@@ -1,6 +1,7 @@
 import angular from 'angular';
 import ngTouch from 'angular-touch';
-import Permission from 'angular-permission'
+import Permission from 'angular-permission';
+import authProvider from 'satellizer';
 
 import ngRedux from 'ng-redux';
 import thunk from 'redux-thunk';
@@ -10,7 +11,7 @@ import { devTools } from 'redux-devtools';
 import uiRouter from 'angular-ui-router';
 import ngReduxRouter from 'redux-ui-router';
 
-import PDB from './pdb'
+import PDB from './pdb';
 
 import rootReducer from './reducers';
 
@@ -29,6 +30,7 @@ angular.module('app', [
     uiRouter,
     ngReduxRouter,
 
+    'satellizer',
     'permission',
 
     Common.name,
@@ -48,6 +50,34 @@ angular.module('app', [
         ['ngUiRouterMiddleware', thunk, logger], 
         [devTools()]
     );
+})
+
+.config(function($authProvider) {
+
+    $authProvider.facebook({
+        url: 'http://localhost:8000/auth/facebook/',
+        clientId: '855012704576907'
+    });
+
+    $authProvider.google({
+        url: 'http://localhost:8000/auth/google/',
+        clientId: '87612612394-3uq02vaa8drdkmsoeu43c8hrfq665oin.apps.googleusercontent.com'
+    });
+
+    $authProvider.github({
+        url: 'http://localhost:8000/auth/github/',
+        clientId: 'GitHub Client ID'
+    });
+
+    $authProvider.linkedin({
+        url: 'http://localhost:8000/auth/linkedin/',
+        clientId: 'LinkedIn Client ID'
+    });
+
+    $authProvider.twitter({
+        url: 'http://localhost:8000/auth/twitter/',
+        clientId: 'Twitter Client ID'
+    });
 })
 
 .run(function(Permission, $ngRedux, $state) {
@@ -114,7 +144,7 @@ angular.module('app', [
         // }
         // THIS SHOULD REDIRECT PROPERLY
         localRedux.dispatch(loadedUserAuthFail(error));
-        alert("Error loading auth: " + error);
+        console.log("Error loading auth: " + error);
     });
 
     console.log("Leaving RUN");

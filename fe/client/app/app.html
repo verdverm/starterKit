@@ -3,7 +3,7 @@
 
     <nav>
         <div class="nav-wrapper blue">
-            <a href="#" data-activates="state-view" class="left state-collapse"><i class="material-icons">info</i></a>
+            <a href="#" data-activates="state-view" class="left state-collapse" style="margin-left:1em;margin-right:1em;"><i class="material-icons">info</i></a>
 
             <a href="/" class="brand-logo">Logo</a>
             <a href="#" data-activates="mobile-demo" class="right button-collapse"><i class="material-icons">menu</i></a>
@@ -15,7 +15,7 @@
                 <li><a ng-hide="vm.auth.authed" ui-sref="login">Login</a></li>
                 
                 <li><a ng-show="vm.auth.authed" ui-sref="profile">Profile</a></li>
-                <li><a ng-show="vm.auth.authed" ui-sref="logout">Logout</a></li>
+                <li><a ng-show="vm.auth.authed" ng-click="vm.logout()">Logout</a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li><a ui-sref="home">Home</a></li>
@@ -25,10 +25,11 @@
                 <li><a ng-hide="vm.auth.authed" ui-sref="login">Login</a></li>
                 
                 <li><a ng-show="vm.auth.authed" ui-sref="profile">Profile</a></li>
-                <li><a ng-show="vm.auth.authed" ui-sref="logout">Logout</a></li>
+                <li><a ng-show="vm.auth.authed" ng-click="vm.logout()">Logout</a></li>
             </ul>
 
             <div id="state-view" class="black white-text side-nav">
+                <a class="right">Close</a>
                 <pre>{{ vm.globalState | json }}</pre>
             </div>
 

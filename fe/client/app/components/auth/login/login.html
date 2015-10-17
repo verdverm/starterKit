@@ -1,23 +1,41 @@
-<div class="container" ng-hide="vm.authState.loading">
-	<div class="card">
-		<div class="card-content container">
-		    <span class="card-title black-text">Login</span>
-				<div class="input-field">
-		          <input placeholder="Username" type="text" class="validate" ng-model="vm.creds.username" required/>
-		        </div>
-				<div class="input-field">
-		          <input placeholder="Password" type="password" class="validate" ng-model="vm.creds.password" required/>
-		        </div>
-		        <input type="submit" hidden/>
-		</div>
-		<div class="card-action">
-			<a ng-click="vm.tryLogin()">Login</a>
-			<a ui-sref="signup" class="right">Signup</a>
-		</div>
-	</div>
+<div class="container row" ng-hide="vm.authState.loading">
+	<div class="card-panel col s12 offset-m2 m8 offset-l3 l6">
+		<div class="container">
+		<div class="row">
+		    <h4 class="black-text center-align">Login</h4>
+			<div class="input-field col s12">
+	            <i class="material-icons prefix">account_box</i>
+	            <input placeholder="Username" type="text" class="validate" ng-model="vm.creds.username" required/>
+	        </div>
+			<div class="input-field col s12">
+		        <i class="material-icons prefix">vpn_key</i>
+				<input placeholder="Password" type="password" class="validate" ng-model="vm.creds.password" required/>
+	        </div>
 
-	<div class="center">
-		<span><a href="#forgot">forgot password</a></span>
+			<a class="btn blue col offset-s2 s8 offset-m3 m6 offset-l4 l4" ng-click="vm.tryLogin()">Login</a>
+
+		</div>
+
+		<div class="row center">
+			<span class="col s12"><a href="#forgot">forgot</a> your username or password?</span><br>
+			<span class="col s12">Don't have an account yet? <a ui-sref="signup">Sign up</a></span>
+		</div>
+
+		<div class="row center valign-wrapper">
+			<span class="col s5 valign"><hr class="grey" style="height:1px;border:none;"></span>
+			<span class="col s2">or</span>
+			<span class="col s5 valign"><hr class="grey" style="height:1px;border:none;"></span>
+		</div>
+
+
+		<div class="row">
+			<a style="background-color:#3b5998;" class="btn col s12" ng-click="vm.tryAuthenticate('facebook')">Sign in with Facebook</a><br><br>
+			<a style="background-color:#dd4b39;" class="btn col s12" ng-click="vm.tryAuthenticate('google')">  Sign in with Google</a><br><br>
+			<a style="background-color:#444;"    class="btn col s12" ng-click="vm.tryAuthenticate('github')">  Sign in with GitHub</a><br><br>
+			<a style="background-color:#007bb6;" class="btn col s12" ng-click="vm.tryAuthenticate('linkedin')">Sign in with LinkedIn</a><br><br>
+			<a style="background-color:#00aced;" class="btn col s12" ng-click="vm.tryAuthenticate('twitter')"> Sign in with Twitter</a><br><br>
+		</div>	
+	</div>	
 	</div>	
 </div>	
 

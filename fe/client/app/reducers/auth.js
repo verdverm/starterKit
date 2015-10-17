@@ -13,16 +13,18 @@ import { LOGOUT_USER,
  *  Pure functions on the state  (state,action) => state
  */
 
-var starting_state = {
+var initial_state = {
 			attempting: false,
-			authed: false,
 			loading: false,
+			saving: false,
+			
+			authed: false,
 			token: '',
 			uid: '',
 			username: '',
 		}
 
-function auth(state = starting_state, action) {
+function auth(state = initial_state, action) {
 	switch (action.type) {
 
 		case LOGIN_USER_REQUEST:
@@ -43,26 +45,35 @@ function auth(state = starting_state, action) {
 				username: action.username,
 				token: action.token,
 			};
+
+			// this needs to be handled differently
 			PDB.put(auth_item, function callback(err, result) {
 			    if (!err) {
 			        console.log('Successfully posted auth data!');
 			        console.log(result);
 
-			        return Object.assign({}, state, {
-						attempting: false,
-						authed: true,
-						uid: action.uid,
-						username: action.username,
-						token: action.token,
-						rev: result.rev,
-					});
+			        // would really like to emit an event and handle here too
+			  //       return Object.assign({}, state, {
+					// 	attempting: false,
+					// 	authed: true,
+					// 	uid: action.uid,
+					// 	username: action.username,
+					// 	token: action.token,
+					// 	rev: result.rev,
+					// });
 			    } else {
-			    	console.log("error posting auth to PouchDB");
+			    	console.log("error posting auth to PouchDB", err);
 			    	alert("error posting auth to PouchDB");
-					return Object.assign({}, state, {attempting: false, error: err});
+					// return Object.assign({}, state, {attempting: false, error: err});
 			    }
 			});
-			return;
+			return Object.assign({}, state, {
+				attempting: false,
+				authed: true,
+				uid: action.uid,
+				username: action.username,
+				token: action.token,
+			});
 
 		case LOADED_USER_AUTH_BEGIN:
 			console.log("Loading Auth Started")
@@ -86,19 +97,28 @@ function auth(state = starting_state, action) {
 
 
 		case LOGOUT_USER:
-			console.log("Logout user")
+			console.log("Logout user", state)
 
 			var del_auth_item = {
 			    _id: "auth_data",
-			    _rev: state.auth.rev
+			    _rev: state.rev
 			}
-			db.remove(del_auth_item);
+			PDB.remove(del_auth_item, function callback(err, result) {
+			    if (!err) {
+			        console.log('Successfully removed auth data!');
+			        console.log(result);
+			    } else {
+			    	console.log("error removing auth to PouchDB", err);
+			    	alert("error removing auth to PouchDB");
+			    }
+			});
 
 			return Object.assign({}, state, {
 				authed: false,
 				uid: '',
 				username: '',
 				token: '',
+				rev: '',
 			});
 
 		default:

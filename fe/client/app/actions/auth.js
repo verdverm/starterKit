@@ -113,7 +113,8 @@ export function loginUserSuccess(username, token) {
 
 export const LOGOUT_USER = 'LOGOUT_USER';
 export function logoutUser() {
-	return {
-		type: LOGOUT_USER,
+	return function (dispatch) {
+		dispatch({type: LOGOUT_USER});
+		dispatch(routerActions.stateGo('home'))
 	}
 }

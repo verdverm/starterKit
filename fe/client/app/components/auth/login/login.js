@@ -7,7 +7,8 @@ import loginComponent from './login.component';
 
 let loginModule = angular.module('login', [
   uiRouter,
-  ngRedux
+  ngRedux,
+  'satellizer'
 ])
 
 .config(($stateProvider, $urlRouterProvider) => {

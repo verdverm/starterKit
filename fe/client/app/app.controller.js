@@ -1,17 +1,27 @@
+import {logoutUser} from './actions/auth'
+
 class AppController {
     constructor($ngRedux, $scope) {
         this.name = 'app';
 
         this.globalState = {};
 
-        let unsubscribe = $ngRedux.connect(this.mapStateToThis)(this);
+        let unsubscribe = $ngRedux.connect(
+            this.mapStateToThis,
+            {logoutUser}
+        )(this);
         $scope.$on('$destroy', unsubscribe);
 
     }
 
+    logout() {
+        this.logoutUser()
+    }
+
     mapStateToThis(state) {
         return {
-            globalState: state
+            globalState: state,
+            auth: state.auth   // for the menu and titles
         };
     }
 }

@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'allauth.account',
     'rest_auth.registration',
 
+    'accounts',
     'users',
     'todos',
 )
@@ -115,6 +116,7 @@ JWT_AUTH = {
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 }
 
+CORS_ALLOW_CREDENTIALS = True
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
@@ -191,6 +193,16 @@ DATABASES = {
 
     }
 }
+
+
+FACEBOOK_SECRET = os.environ.get('FACEBOOK_SECRET') or 'Facebook Client Secret'
+GITHUB_SECRET = os.environ.get('GITHUB_SECRET') or 'GitHub Client Secret'
+GOOGLE_SECRET = os.environ.get('GOOGLE_SECRET') or 'Google Client Secret'
+LINKEDIN_SECRET = os.environ.get('LINKEDIN_SECRET') or 'LinkedIn Client Secret'
+TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY') or 'Twitter Consumer Secret'
+TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET') or 'Twitter Consumer Secret'
+TWITTER_CALLBACK_URL = os.environ.get('TWITTER_CALLBACK_URL') or 'Twitter Redirect URI'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
