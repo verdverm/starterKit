@@ -8,13 +8,20 @@ class LoginController {
         this.authenticate = $auth.authenticate;
 
         this.creds = {
-            username: '',
-            password: ''
+            username: {
+                name: 'username',
+                value: '',
+                error: ''
+            },
+            password: {
+                name: 'password',
+                value: '',
+                error: ''
+            },
+
         }
 
         let localActions = Object.assign({}, routerActions, {loginUser:loginUser})
-        // console.log(routerActions);
-        // console.log(localActions);
 
         let unsubscribe = $ngRedux.connect(
             this.mapStateToThis,
@@ -24,8 +31,6 @@ class LoginController {
 
         $scope.$on('$destroy', unsubscribe);
 
-        // console.log(this);
-
     }
 
     mapStateToThis(state) {
@@ -34,10 +39,41 @@ class LoginController {
         };
     }
 
-    tryLogin() {
-        // clientSide validation...
+    clearErrors() {
+        this.creds.username.error = '';
+        this.creds.password.error = '';
+    }
 
-        this.loginUser(this.creds.username, this.creds.password);
+    tryLogin() {
+        this.clearErrors();
+
+        // clientSide validation...
+        function checkEmpty(field) {
+            if ( field.value === "" ) {
+                field.error = "Field empty but required";
+                return false;
+            }
+            return true;
+        }
+        function checkMatch(field1, field2) {
+            if ( field1.value === field2.value ) {
+                field2.error = "Field must match " + field1.name;
+                return false;
+            }
+            return true;
+        }
+
+        let passed = true;
+        passed = checkEmpty(this.creds.username) && passed;
+        passed = checkEmpty(this.creds.password) && passed;
+
+        if (passed) {
+            var username = this.creds.username.value;
+            var password = this.creds.password.value;
+
+            this.loginUser(username, password);
+        }
+
     }
 
     tryAuthenticate(provider) {

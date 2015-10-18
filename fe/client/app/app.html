@@ -33,6 +33,7 @@
                     <li><a ng-hide="vm.auth.authed" ui-sref="login">Login</a></li>
                     
                     <li><a ng-show="vm.auth.authed" ui-sref="profile">Profile</a></li>
+                    <li class="divider" ng-show="vm.auth.authed"></li>
                     <li><a ng-show="vm.auth.authed" ng-click="vm.logout()">Logout</a></li>
                 </ul>
             </div>
@@ -41,7 +42,10 @@
                 <nav>
                     <div class="nav-wrapper blue">
                         <a class="brand-logo left white-text" style="font-size: 1.5em">State</a>
-                        <a><i class="material-icons right white-text" style="margin-top:0.5em;margin-right:0.3em;">close</i></a>
+                        <a>
+                            <i class="material-icons right white-text hide-on-med-and-up" style="margin-top:0.5em;margin-right:0.3em;">close</i>
+                            <i class="material-icons right white-text hide-on-small-only" style="margin-right:0.3em;">close</i>
+                        </a>
                     </div>
                 </nav>
                 <pre>{{ vm.globalState | json }}</pre>

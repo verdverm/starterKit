@@ -94,12 +94,6 @@ angular.module('app', [
                 }
                 
                 localRedux.dispatch( loadAuth(pass_url, fail_url) );        
-
-                console.log('urls: ', pass_url, fail_url);
-                console.log("name: ", name);
-
-
-
             }
         }
     );

@@ -1,23 +1,39 @@
-<div class="container row" ng-hide="vm.authState.loading">
+<div class="container row" ng-hide="vm.authState.load_ing">
 	<div class="card-panel col s12 offset-m2 m8 offset-l3 l6">
 		<div class="container">
 		<div class="row">
 		    <h4 class="black-text center-align">Sign up</h4>
 			<div class="input-field col s12">
 	            <i class="material-icons prefix">account_box</i>
-				<input placeholder="Username" type="text" class="validate" ref="usernameInput" required/>
+				<input placeholder="Username" type="text" ng-model="vm.creds.username.value"/>
+	            <div class="red-text form-error" ng-show="vm.creds.username.error">
+		            <i class="material-icons">report_problem</i>
+	            	<span>{{vm.creds.username.error}}</span>
+	            </div>
 	        </div>
 			<div class="input-field col s12">
 	            <i class="material-icons prefix">email</i>
-	          <input placeholder="Email" type="email" class="validate" ref="usernameInput" required/>
+	            <input placeholder="Email" type="email" ng-model="vm.creds.email.value"/>
+	            <div class="red-text form-error" ng-show="vm.creds.email.error">
+		            <i class="material-icons">report_problem</i>
+	            	<span>{{vm.creds.email.error}}</span>
+	            </div>
 	        </div>
 			<div class="input-field col s12">
 	            <i class="material-icons prefix">vpn_key</i>
-	          <input placeholder="Password" type="password" class="validate" ref="passwordInput" required/>
+	            <input placeholder="Password" type="password" ng-model="vm.creds.password.value"/>
+	            <div class="red-text form-error" ng-show="vm.creds.password.error">
+		            <i class="material-icons">report_problem</i>
+	            	<span>{{vm.creds.password.error}}</span>
+	            </div>
 	        </div>
 			<div class="input-field col s12">
 	            <i class="material-icons prefix">vpn_key</i>
-	          <input placeholder="Password Confirm" type="password" class="validate" ref="confirmInput" required/>
+	            <input placeholder="Password Confirm" type="password" ng-model="vm.creds.confirm.value"/>
+	            <div class="red-text form-error" ng-show="vm.creds.confirm.error">
+		            <i class="material-icons">report_problem</i>
+	            	<span>{{vm.creds.confirm.error}}</span>
+	            </div>
 	        </div>
 		</div>
 
@@ -29,6 +45,10 @@
 			<a class="btn blue col offset-s2 s8 offset-m3 m6 offset-l4 l4" ng-click="vm.signup()">Sign up</a>
 		</div>
 
+		<div class="row center" ng-show="vm.authState.signup_ing">
+			<spinner></spinner>
+		</div>
+		
 		<div class="row center">
 			<span class="col s12">Already have an account yet? <a ui-sref="login">Login</a></span>
 		</div>

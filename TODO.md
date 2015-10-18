@@ -19,7 +19,7 @@ frontend...
 backend...
 
 - others, besides facebook
-`be/django/accounts/views.py`
+  - `be/django/accounts/views.py`
 - oauth
 - token tracking
 - save info to model, db

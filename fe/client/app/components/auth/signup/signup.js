@@ -1,9 +1,12 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import ngRedux from 'ng-redux';
+
 import signupComponent from './signup.component';
 
 let signupModule = angular.module('signup', [
-  uiRouter
+  uiRouter,
+  ngRedux
 ])
 
 .config(($stateProvider, $urlRouterProvider) => {
@@ -12,7 +15,14 @@ let signupModule = angular.module('signup', [
   $stateProvider
     .state('signup', {
       url: '/signup',
-      template: '<signup></signup>'
+      template: '<signup></signup>',
+      data: {
+        permissions: {
+          only: ['anonymous'],
+          redirectTo: 'profile'
+        }
+      }
+
     });
 })
 

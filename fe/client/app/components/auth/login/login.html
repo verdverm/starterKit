@@ -5,15 +5,24 @@
 		    <h4 class="black-text center-align">Login</h4>
 			<div class="input-field col s12">
 	            <i class="material-icons prefix">account_box</i>
-	            <input placeholder="Username" type="text" class="validate" ng-model="vm.creds.username" required/>
+	            <input placeholder="Username" type="text" class="validate" ng-model="vm.creds.username.value" required/>
+	            <div class="red-text form-error" ng-show="vm.creds.username.error">
+		            <i class="material-icons">report_problem</i>
+	            	<span>{{vm.creds.username.error}}</span>
+	            </div>
 	        </div>
 			<div class="input-field col s12">
 		        <i class="material-icons prefix">vpn_key</i>
-				<input placeholder="Password" type="password" class="validate" ng-model="vm.creds.password" required/>
+				<input placeholder="Password" type="password" class="validate" ng-model="vm.creds.password.value" required/>
+	            <div class="red-text form-error" ng-show="vm.creds.password.error">
+		            <i class="material-icons">report_problem</i>
+	            	<span>{{vm.creds.password.error}}</span>
+	            </div>
 	        </div>
+        </div>
 
+		<div class="row center">
 			<a class="btn blue col offset-s2 s8 offset-m3 m6 offset-l4 l4" ng-click="vm.tryLogin()">Login</a>
-
 		</div>
 		
 		<div class="row center" ng-show="vm.authState.login_ing">

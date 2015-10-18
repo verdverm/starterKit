@@ -1,6 +1,5 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-
 import ngRedux from 'ng-redux';
 
 import loginComponent from './login.component';

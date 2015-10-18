@@ -10,7 +10,7 @@ var initial_state = {
 	// these corrispond to state values 
 	// for processing auth actions
 	// (true means running)
-	register_ing: false,
+	signup_ing: false,
 	login_ing: false,
 	test_ing: false,
 	logout_ing: false,
@@ -23,26 +23,27 @@ var initial_state = {
 	token: '',
 	uid: '',
 	username: '',
+	error: null,
 }
 
 function auth(state = initial_state, action) {
 	switch (action.type) {
 
-		case AUTH.REGISTER_USER_STARTED:
+		case AUTH.SIGNUP_USER_STARTED:
 			return Object.assign({}, state, {
-				register_ing: true
+				signup_ing: true
 			});
 
-		case AUTH.REGISTER_USER_FAILURE:
+		case AUTH.SIGNUP_USER_FAILURE:
 			return Object.assign({}, state, {
-				register_ing: false, 
+				signup_ing: false, 
 				error: action.error
 			});
 
-		case AUTH.REGISTER_USER_SUCCESS:
+		case AUTH.SIGNUP_USER_SUCCESS:
 
 			return Object.assign({}, state, {
-				register_ing: false,
+				signup_ing: false,
 
 				authed: true,
 				uid: action.uid,
@@ -118,6 +119,9 @@ function auth(state = initial_state, action) {
 			});
 
 		case AUTH.LOAD_AUTH_FAILURE:
+			if (action.error.status === 404) {
+				action.error = null;
+			}
 			return Object.assign({}, state, {
 				load_ing: false, 
 				error: action.error

@@ -7,16 +7,16 @@ import routerActions from "./router"
 import PDB from '../pdb'
 
 
-export const REGISTER_USER_STARTED = 'REGISTER_USER_STARTED';
-export const REGISTER_USER_FAILURE = 'REGISTER_USER_FAILURE';
-export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
-export const registerUserStarted = actionCreator(REGISTER_USER_STARTED);
-export const registerUserFailure = actionCreator(REGISTER_USER_FAILURE, 'error');
-export const registerUserSuccess = actionCreator(REGISTER_USER_SUCCESS, 'uid', 'username', 'token');
-export function registerUser(username, email, password, success_url = "profile", failure_url = "") {
+export const SIGNUP_USER_STARTED = 'SIGNUP_USER_STARTED';
+export const SIGNUP_USER_FAILURE = 'SIGNUP_USER_FAILURE';
+export const SIGNUP_USER_SUCCESS = 'SIGNUP_USER_SUCCESS';
+export const signupUserStarted = actionCreator(SIGNUP_USER_STARTED);
+export const signupUserFailure = actionCreator(SIGNUP_USER_FAILURE, 'error');
+export const signupUserSuccess = actionCreator(SIGNUP_USER_SUCCESS, 'uid', 'username', 'token');
+export function signupUser(username, email, password, success_url = "profile", failure_url = "") {
     return function(dispatch) {
 
-        dispatch(registerUserStarted());
+        dispatch(signupUserStarted());
 
         var payload = {
             username,
@@ -33,7 +33,7 @@ export function registerUser(username, email, password, success_url = "profile",
             success: function(resp) {
                 var uid = "n/a";
                 var token = resp.token;
-                dispatch(registerUserSuccess(uid, username, token));
+                dispatch(signupUserSuccess(uid, username, token));
                 dispatch(saveAuth(uid, username, token));
 
 	            if (success_url !== "") {
@@ -41,7 +41,7 @@ export function registerUser(username, email, password, success_url = "profile",
 	            }
             }.bind(this),
             error: function(xhr, status, error) {
-                dispatch(registerUserFailure(error));
+                dispatch(signupUserFailure(error));
 	            if (failure_url !== "") {
 	                dispatch(routerActions.stateGo(failure_url));
 	            }
