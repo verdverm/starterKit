@@ -44,9 +44,9 @@ angular.module('app', [
     });
 
     $ngReduxProvider.createStoreWith(
-        rootReducer, 
-        ['ngUiRouterMiddleware', thunk, logger], 
-        [devTools()]
+        rootReducer,
+        ['ngUiRouterMiddleware', thunk, logger] 
+        ,[devTools()]
     );
 })
 

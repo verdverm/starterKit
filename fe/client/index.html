@@ -9,39 +9,57 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="description" content="App Description">
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/headjs/1.0.3/head.load.min.js"></script>
+    <script>
+        var cssfiles = [
+            "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css",
+            "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
+            // "/css/style.css",
+        ];
+        head.load(cssfiles, function() {
+            console.log("cssfiles loaded");
+        });
+    </script>
 
     <base href="/">
 </head>
 
-<body ng-app="app" ng-cloak  style="height:100%" class="blue-grey lighten-5">
+<body ng-app="app" ng-cloak style="height:100%" class="blue-grey lighten-5">
 
     <app>
         Loading...
     </app>
 
-    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 
-    <script src="bundle.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('.button-collapse').sideNav({
-                menuWidth: 240, // Default is 240
-                edge: 'right', // Choose the horizontal origin
-                closeOnClick: true // Closes side-nav on <a> clicks
+        var jsfiles = [
+            "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js",
+            "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js",
+            "bundle.js",
+        ];
+        head.load(jsfiles);
+
+        head.ready(function() {
+            // do something
+            console.log("jsfiles loaded")
+            
+            $(document).ready(function() {
+                $('.button-collapse').sideNav({
+                    menuWidth: 240, // Default is 240
+                    edge: 'right', // Choose the horizontal origin
+                    closeOnClick: true // Closes side-nav on <a> clicks
+                });
+                $('.state-collapse').sideNav({
+                    menuWidth: 300, // Default is 240
+                    edge: 'left', // Choose the horizontal origin
+                    closeOnClick: true // Closes side-nav on <a> clicks
+                });
             });
 
-            $('.state-collapse').sideNav({
-                menuWidth: 300, // Default is 240
-                edge: 'left', // Choose the horizontal origin
-                closeOnClick: true // Closes side-nav on <a> clicks
-            });
         });
     </script>
 
