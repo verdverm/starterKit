@@ -15,7 +15,7 @@ class AppController {
     }
 
     logout() {
-        this.logoutUser()
+        this.logoutUser(this.auth.rev);
     }
 
     mapStateToThis(state) {

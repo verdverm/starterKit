@@ -13,8 +13,8 @@ class LoginController {
         }
 
         let localActions = Object.assign({}, routerActions, {loginUser:loginUser})
-        console.log(routerActions);
-        console.log(localActions);
+        // console.log(routerActions);
+        // console.log(localActions);
 
         let unsubscribe = $ngRedux.connect(
             this.mapStateToThis,
@@ -24,7 +24,7 @@ class LoginController {
 
         $scope.$on('$destroy', unsubscribe);
 
-        console.log(this);
+        // console.log(this);
 
     }
 
@@ -35,9 +35,6 @@ class LoginController {
     }
 
     tryLogin() {
-        console.log("LoginController:", this.creds.username, this.creds.password);
-        console.log("authState:", this.authState);
-
         // clientSide validation...
 
         this.loginUser(this.creds.username, this.creds.password);

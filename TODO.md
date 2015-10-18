@@ -3,12 +3,23 @@ TODO
 
 #### What I was working on last:
 
-Oauth
+**Current major task:** Oauth
 
-`be/django/accounts/views.py`
+**Next major task:** GAE Deploy
 
-- others, besides facebook
-- save info to model, db
+
 
 frontend...
+
+- oauth
+
+backend...
+
+- others, besides facebook
+`be/django/accounts/views.py`
+- oauth
+- token tracking
+- save info to model, db
+
+
 

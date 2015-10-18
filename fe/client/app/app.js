@@ -11,15 +11,13 @@ import { devTools } from 'redux-devtools';
 import uiRouter from 'angular-ui-router';
 import ngReduxRouter from 'redux-ui-router';
 
-import PDB from './pdb';
-
 import rootReducer from './reducers';
 
 import Common from './common/common';
 import Components from './components/components';
 import AppComponent from './app.component';
 
-import { loadedUserAuth, loadedUserAuthBegin, loadedUserAuthFail } from './actions/auth';
+import { loadAuth } from './actions/auth';
 import routerActions from "./actions/router"
 
 
@@ -80,11 +78,33 @@ angular.module('app', [
     });
 })
 
-.run(function(Permission, $ngRedux, $state) {
-
+.run(function(Permission, $ngRedux, $rootScope, $state) {
     // grab local copy of redux and routerState for closures
     let localRedux = $ngRedux;
-    let localState = $state;
+
+    let first = true;
+    $rootScope.$on('$stateChangeSuccess',
+        function(event, toState, toParams, fromState, fromParams) {
+            if ( first == true ) {
+                let name = toState.name;
+                first = false;
+
+                var pass_url = name;
+                var fail_url = pass_url;
+                if (pass_url === "login" || pass_url === "register") {
+                    pass_url = 'profile';
+                }
+                
+                localRedux.dispatch( loadAuth(pass_url, fail_url) );        
+
+                console.log('urls: ', pass_url, fail_url);
+                console.log("name: ", name);
+
+
+
+            }
+        }
+    );
 
     // Configure permissions on the UI
     // Define anonymous role
@@ -111,43 +131,12 @@ angular.module('app', [
         return state.auth.admin === true;
     });
 
-    console.log("Running");
 
+    // determine where we should redirect after successful auth load
+    // if we are successful, go where ever, unless authed and trying to
+    // if failure, go where ever too, will get redirected to login if we can
 
-    // dispatch that we are starting to load auth
-    localRedux.dispatch(loadedUserAuthBegin());
-
-    // start the auth load
-    PDB.get('auth_data').then(function (doc) {
-        console.log("PouchDB loaded:", doc);
-        
-        localRedux.dispatch(loadedUserAuth(
-            doc.username,
-            doc.uid,
-            doc.token,
-            doc._rev
-        ));
-
-        console.log("PouchDB dispatched");
-
-        // determine where we should redirect after successful auth load
-        var self_name = localState.$current.self.name;
-        if (self_name === "login" || self_name === "register") {
-            localRedux.dispatch(routerActions.stateGo('profile'));
-        }
-
-    }, function (error) {
-        // determine where we should redirect after successful auth load
-        // var self_name = localState.$current.self.name;
-        // if (self_name === "login" || self_name === "register") {
-        //     localRedux.dispatch(routerActions.stateGo('profile'));
-        // }
-        // THIS SHOULD REDIRECT PROPERLY
-        localRedux.dispatch(loadedUserAuthFail(error));
-        console.log("Error loading auth: " + error);
-    });
-
-    console.log("Leaving RUN");
+    console.log("Runnin' App")
     
 })
 
