@@ -1,4 +1,4 @@
-<div class="container row" ng-hide="vm.authState.loading">
+<div class="container row" ng-hide="vm.authState.load_ing">
 	<div class="card-panel col s12 offset-m2 m8 offset-l3 l6">
 		<div class="container">
 		<div class="row">
@@ -15,7 +15,11 @@
 			<a class="btn blue col offset-s2 s8 offset-m3 m6 offset-l4 l4" ng-click="vm.tryLogin()">Login</a>
 
 		</div>
-
+		
+		<div class="row center" ng-show="vm.authState.login_ing">
+			<spinner></spinner>
+		</div>
+		
 		<div class="row center">
 			<span class="col s12"><a href="#forgot">forgot</a> your username or password?</span><br>
 			<span class="col s12">Don't have an account yet? <a ui-sref="signup">Sign up</a></span>

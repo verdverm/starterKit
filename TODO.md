@@ -12,6 +12,9 @@ TODO
 frontend...
 
 - oauth
+- auth errors
+- form errors & validation
+
 
 backend...
 

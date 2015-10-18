@@ -3,12 +3,14 @@
 
     <nav>
         <div class="nav-wrapper blue">
-            <a href="#" data-activates="state-view" class="left state-collapse" style="margin-left:1em;margin-right:1em;"><i class="material-icons">info</i></a>
+            <a href="#" data-activates="state-view" class="left state-collapse">
+                <i class="material-icons hide-on-med-and-up" style="margin-left:0.3em;margin-top:0.5em;margin-right:1em;">info</i>
+                <i class="material-icons hide-on-small-only" style="margin-left:0.3em;margin-right:1em;">info</i>
+            </a>
 
-            <a href="/" class="brand-logo">Logo</a>
-            <a href="#" data-activates="mobile-demo" class="right button-collapse"><i class="material-icons">menu</i></a>
+            <a ui-sref="home" class="brand-logo">starterKit</a>
+            <a data-activates="mobile-demo" class="right button-collapse"><i class="material-icons" style="margin-right:0.3em;">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a ui-sref="home">Home</a></li>
                 <li><a ui-sref="about">About</a></li>
 
                 <li><a ng-hide="vm.auth.authed" ui-sref="signup">Signup</a></li>
@@ -17,19 +19,31 @@
                 <li><a ng-show="vm.auth.authed" ui-sref="profile">Profile</a></li>
                 <li><a ng-show="vm.auth.authed" ng-click="vm.logout()">Logout</a></li>
             </ul>
-            <ul class="side-nav" id="mobile-demo">
-                <li><a ui-sref="home">Home</a></li>
-                <li><a ui-sref="about">About</a></li>
+            
+            <div class="side-nav" id="mobile-demo">
+                <nav>
+                    <div class="nav-wrapper blue">
+                        <a ui-sref="home" class="brand-logo white-text" style="font-size: 1.5em">starterKit</a>
+                    </div>
+                </nav>
+                <ul>
+                    <li><a ui-sref="about">About</a></li>
 
-                <li><a ng-hide="vm.auth.authed" ui-sref="signup">Signup</a></li>
-                <li><a ng-hide="vm.auth.authed" ui-sref="login">Login</a></li>
-                
-                <li><a ng-show="vm.auth.authed" ui-sref="profile">Profile</a></li>
-                <li><a ng-show="vm.auth.authed" ng-click="vm.logout()">Logout</a></li>
-            </ul>
+                    <li><a ng-hide="vm.auth.authed" ui-sref="signup">Signup</a></li>
+                    <li><a ng-hide="vm.auth.authed" ui-sref="login">Login</a></li>
+                    
+                    <li><a ng-show="vm.auth.authed" ui-sref="profile">Profile</a></li>
+                    <li><a ng-show="vm.auth.authed" ng-click="vm.logout()">Logout</a></li>
+                </ul>
+            </div>
 
             <div id="state-view" class="black white-text side-nav">
-                <a class="right">Close</a>
+                <nav>
+                    <div class="nav-wrapper blue">
+                        <a class="brand-logo left white-text" style="font-size: 1.5em">State</a>
+                        <a><i class="material-icons right white-text" style="margin-top:0.5em;margin-right:0.3em;">close</i></a>
+                    </div>
+                </nav>
                 <pre>{{ vm.globalState | json }}</pre>
             </div>
 

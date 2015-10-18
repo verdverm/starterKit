@@ -13,7 +13,6 @@ import ngReduxRouter from 'redux-ui-router';
 
 import rootReducer from './reducers';
 
-import Common from './common/common';
 import Components from './components/components';
 import AppComponent from './app.component';
 
@@ -31,7 +30,6 @@ angular.module('app', [
     'satellizer',
     'permission',
 
-    Common.name,
     Components.name
 ])
 
