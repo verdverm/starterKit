@@ -3,7 +3,6 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.response import Response
 from rest_framework import permissions
 
-
 from accounts.models import UserAccounts
 from accounts.serializers import UserAccountsSerializer
 
@@ -12,6 +11,29 @@ import app.local_settings as settings
 import requests
 import json
 from urlparse import parse_qs, parse_qsl
+
+
+
+# @api_view(['POST'])
+# @authentication_classes([])
+# @permission_classes([])
+# @throttle_classes([])
+# def unlink(request):
+#     current_user = request.user
+#     unlink_account = ?
+
+
+
+from rest_framework_jwt.settings import api_settings
+
+def gen_jwt_token(user):
+    jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+    jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+    payload = jwt_payload_handler(user)
+    token = jwt_encode_handler(payload)
+    return token
+
 
 
 @api_view(['POST'])
@@ -39,8 +61,39 @@ def facebook(request):
     r = requests.get(graph_api_url, params=access_token)
     profile = json.loads(r.text)
     profile["token"] = "temp_token"
+
+    current_user = request.user
+
+    create = True
+    account = UserAccount.query.filter_by(facebook=profile['id']).first()
+    if account:
+        create = False
+
+    profile["create"] = create
+
+    # # # Step 3. Link account, return account, or create user
+    # if current_user.is_authenticated():
+    #     # Link accounts.
+
+    # else:
+
+    #     if create:
+    #         # Create a new account
+    #         username = profile['id']
+    #         email = 
+    #         password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(16))
+
+    #     else:
+    #         # return an existing account and set authenticated
+    #         profile["token"] = "temp_token"
+
+
+
+
+
     print profile
     return Response(profile)
+
 
     # # Step 3. (optional) Link accounts.
     # if request.headers.get('Authorization'):
@@ -75,6 +128,7 @@ def facebook(request):
     # db.session.commit()
     # token = create_token(u)
     # return jsonify(token=token)
+
 
 @api_view(['POST'])
 @authentication_classes([])

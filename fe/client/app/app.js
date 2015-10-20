@@ -76,24 +76,36 @@ angular.module('app', [
     });
 })
 
-.run(function(Permission, $ngRedux, $rootScope, $state) {
+.run(function(Permission, $ngRedux, $rootScope, $state, $location) {
     // grab local copy of redux and routerState for closures
     let localRedux = $ngRedux;
+
+    let url = $location.url();
+    console.log("URL: ", url);
+
+    let states = $state.get();
+    for (var i = states.length - 1; i >= 0; i--) {
+        if (states[i].url === url) {
+            url = states[i].name;
+        }
+    };
+
+
 
     let first = true;
     $rootScope.$on('$stateChangeSuccess',
         function(event, toState, toParams, fromState, fromParams) {
             if ( first == true ) {
-                let name = toState.name;
                 first = false;
 
-                var pass_url = name;
+                var pass_url = url;
                 var fail_url = pass_url;
                 if (pass_url === "login" || pass_url === "register") {
                     pass_url = 'profile';
                 }
                 
                 localRedux.dispatch( loadAuth(pass_url, fail_url) );        
+
             }
         }
     );

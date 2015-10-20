@@ -1,7 +1,68 @@
-<div class="container">
-	<div class="card">
-		<div class="card-content container">
-		    <span class="card-title black-text">{{ vm.name }}</span>
-		</div>
-	</div>
-</div>	
+<div class="container row">
+    <div class="card-panel col s12 offset-m2 m8 offset-l3 l6">
+        <div class="container">
+            <div class="row">
+                <h4 class="black-text center-align">Account</h4>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">account_box</i>
+                    <input placeholder="Username" type="text" ng-model="vm.creds.username.value" />
+                    <div class="red-text form-error" ng-show="vm.creds.username.error">
+                        <i class="material-icons">report_problem</i>
+                        <span>{{vm.creds.username.error}}</span>
+                    </div>
+                </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">email</i>
+                    <input placeholder="Email" type="email" ng-model="vm.creds.email.value" />
+                    <div class="red-text form-error" ng-show="vm.creds.email.error">
+                        <i class="material-icons">report_problem</i>
+                        <span>{{vm.creds.email.error}}</span>
+                    </div>
+                </div>
+            </div>
+
+<!--                 <div class="input-field col s12">
+                    <i class="material-icons prefix">vpn_key</i>
+                    <input placeholder="Password" type="password" ng-model="vm.creds.password.value" />
+                    <div class="red-text form-error" ng-show="vm.creds.password.error">
+                        <i class="material-icons">report_problem</i>
+                        <span>{{vm.creds.password.error}}</span>
+                    </div>
+                </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">vpn_key</i>
+                    <input placeholder="Password Confirm" type="password" ng-model="vm.creds.confirm.value" />
+                    <div class="red-text form-error" ng-show="vm.creds.confirm.error">
+                        <i class="material-icons">report_problem</i>
+                        <span>{{vm.creds.confirm.error}}</span>
+                    </div>
+                </div> -->
+
+
+            <div class="row center valign-wrapper">
+                <span class="col s5 valign"><hr class="grey" style="height:1px;border:none;"></span>
+                <span class="col s2">also</span>
+                <span class="col s5 valign"><hr class="grey" style="height:1px;border:none;"></span>
+            </div>
+
+
+            <div class="row">
+                <a style="background-color:#3b5998;" class="btn col s12" ng-click="vm.tryAuthenticate('facebook')">Link with Facebook</a>
+                <br>
+                <br>
+                <a style="background-color:#dd4b39;" class="btn col s12" ng-click="vm.tryAuthenticate('google')">Link with Google</a>
+                <br>
+                <br>
+                <a style="background-color:#444;" class="btn col s12" ng-click="vm.tryAuthenticate('github')">Link with GitHub</a>
+                <br>
+                <br>
+                <a style="background-color:#007bb6;" class="btn col s12" ng-click="vm.tryAuthenticate('linkedin')">Link with LinkedIn</a>
+                <br>
+                <br>
+                <a style="background-color:#00aced;" class="btn col s12" ng-click="vm.tryAuthenticate('twitter')"> Sign in with Twitter</a>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

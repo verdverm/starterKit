@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>App Title</title>
+    <title>starterKit</title>
     <meta name="viewport" content="width=device-width initial-scale=1 maximum-scale=1 user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,7 +17,7 @@
     <script>
         var cssfiles = [
             "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css",
-            "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
+            // "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
             // "/css/style.css",
         ];
         head.load(cssfiles, function() {
@@ -51,7 +51,7 @@
             console.log("jsfiles loaded")
             
             $(document).ready(function() {
-                $('.button-collapse').sideNav({
+                $('.menu-collapse').sideNav({
                     menuWidth: 240, // Default is 240
                     edge: 'right', // Choose the horizontal origin
                     closeOnClick: true // Closes side-nav on <a> clicks

@@ -8,33 +8,58 @@
                 <i class="material-icons hide-on-small-only" style="margin-left:0.3em;margin-right:1em;">info</i>
             </a>
 
-            <a ui-sref="home" class="brand-logo">starterKit</a>
-            <a data-activates="mobile-demo" class="right button-collapse"><i class="material-icons" style="margin-right:0.3em;">menu</i></a>
-            <ul class="right hide-on-med-and-down">
+            <a ui-sref="home" class="left brand-logo" style="margin-left:2em">starterKit</a>
+            <a data-activates="mobile-demo" class="right menu-collapse hide-on-med-and-up"><i class="material-icons" style="margin-right:0.3em;margin-top:0.5em;">menu</i></a>
+            <ul class="right hide-on-small-only">
                 <li><a ui-sref="about">About</a></li>
 
                 <li><a ng-hide="vm.auth.authed" ui-sref="signup">Signup</a></li>
                 <li><a ng-hide="vm.auth.authed" ui-sref="login">Login</a></li>
                 
-                <li><a ng-show="vm.auth.authed" ui-sref="profile">Profile</a></li>
-                <li><a ng-show="vm.auth.authed" ng-click="vm.logout()">Logout</a></li>
+                <li><a ng-show="vm.auth.authed" ui-sref="profile"><i class="material-icons">account_circle</i></a></li>
+                <li><a ng-show="vm.auth.authed" ui-sref="account"><i class="material-icons">settings</i></a></li>
+                <li><a ng-show="vm.auth.authed" data-activates="mobile-demo" class="right menu-collapse"><i class="material-icons" style="margin-right:0.3em;">menu</i></a></li>
             </ul>
             
-            <div class="side-nav" id="mobile-demo">
+            <div class="side-nav black-text" id="mobile-demo">
                 <nav>
                     <div class="nav-wrapper blue">
                         <a ui-sref="home" class="brand-logo white-text" style="font-size: 1.5em">starterKit</a>
                     </div>
                 </nav>
                 <ul>
-                    <li><a ui-sref="about">About</a></li>
+                    <li>
+                        <i ng-show="vm.auth.authed" class="material-icons tiny grey-text text-darken-3 left hide-on-med-and-up" style="margin-top:0.6em;">font_download</i>
+                        <i ng-show="vm.auth.authed" class="material-icons tiny grey-text text-darken-3 left hide-on-small-only">font_download</i>
+                        <a ui-sref="about">About</a>
+                    </li>
 
-                    <li><a ng-hide="vm.auth.authed" ui-sref="signup">Signup</a></li>
-                    <li><a ng-hide="vm.auth.authed" ui-sref="login">Login</a></li>
-                    
-                    <li><a ng-show="vm.auth.authed" ui-sref="profile">Profile</a></li>
+                    <li ng-hide="vm.auth.authed">
+                        <a ui-sref="signup">Signup</a>
+                    </li>
+                    <li ng-hide="vm.auth.authed">
+                        <a ui-sref="login">Login</a>
+                    </li>
+                </ul>
+                <ul class="hide-on-med-and-up">
+                    <li ng-show="vm.auth.authed">
+                        <i class="material-icons tiny grey-text text-darken-3 left hide-on-med-and-up" style="margin-top:0.6em;">account_circle</i>
+                        <i class="material-icons tiny grey-text text-darken-3 left hide-on-small-only">account_circle</i>
+                        <a ui-sref="profile">Profile</a>
+                    </li>
+                    <li ng-show="vm.auth.authed">
+                        <i class="material-icons tiny grey-text text-darken-3 left hide-on-med-and-up" style="margin-top:0.6em;">settings</i>
+                        <i class="material-icons tiny grey-text text-darken-3 left hide-on-small-only">settings</i>
+                        <a ui-sref="account">Account</a>
+                    </li>
+                </ul>
+                <ul>
                     <li class="divider" ng-show="vm.auth.authed"></li>
-                    <li><a ng-show="vm.auth.authed" ng-click="vm.logout()">Logout</a></li>
+                    <li ng-show="vm.auth.authed">
+                        <i class="material-icons tiny grey-text text-darken-3 left hide-on-med-and-up" style="margin-top:0.6em;">exit_to_app</i>
+                        <i class="material-icons tiny grey-text text-darken-3 left hide-on-small-only">exit_to_app</i>
+                        <a ng-click="vm.logout()">Logout</a>
+                    </li>
                 </ul>
             </div>
 
