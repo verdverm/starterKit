@@ -5,11 +5,11 @@ import ngRedux from 'ng-redux';
 import accountComponent from './account.component';
 
 let accountModule = angular.module('account', [
-  uiRouter,
-  ngRedux
+  'ui.router',
+  'ngRedux',
 ])
 
-.config(($stateProvider) => {
+.config(['$stateProvider', ($stateProvider) => {
   $stateProvider
     .state('account', {
       url: '/account',
@@ -21,7 +21,7 @@ let accountModule = angular.module('account', [
         }
       }
     });
-})
+}])
 
 .directive('account', accountComponent);
 

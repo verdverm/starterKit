@@ -1,7 +1,9 @@
 'use strict';
 
 import gulp     from 'gulp';
-import webpack  from 'webpack-stream';
+import gutil    from 'gulp-util';
+import webpack  from 'webpack';
+import webpackStream  from 'webpack-stream';
 import path     from 'path';
 import sync     from 'run-sequence';
 import serve    from 'browser-sync';
@@ -41,7 +43,7 @@ let paths = {
 // use webpack.config.js to build modules
 gulp.task('webpack', () => {
   return gulp.src(paths.entry)
-    .pipe(webpack(require('./webpack.config')))
+    .pipe(webpackStream(require('./webpack.config')))
     .pipe(gulp.dest(paths.output));
 });
 
@@ -75,6 +77,36 @@ gulp.task('component', () => {
       path.basename = path.basename.replace('temp', name);
     }))
     .pipe(gulp.dest(destPath));
+});
+
+// Production build
+gulp.task("build", ["webpack:build"]);
+
+gulp.task("webpack:build", function(callback) {
+  // modify some webpack config options
+  var myConfig = Object.create(require('./webpack.production.config'));
+  if (!myConfig.plugins){ 
+    myConfig.plugins = [];
+  }
+  myConfig.plugins = myConfig.plugins.concat(
+    new webpack.DefinePlugin({
+      "process.env": {
+        // This has effect on the react lib size
+        "NODE_ENV": JSON.stringify("production")
+      }
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin()
+  );
+
+  // run webpack
+  webpack(myConfig, function(err, stats) {
+    if(err) throw new gutil.PluginError("webpack:build", err);
+    gutil.log("[webpack:build]", stats.toString({
+      colors: true
+    }));
+    callback();
+  });
 });
 
 gulp.task('default', (done) => {

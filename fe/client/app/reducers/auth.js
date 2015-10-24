@@ -2,9 +2,6 @@ import PDB from '../pdb'
 
 import * as AUTH from '../actions/auth';
 
-/*
- *  Pure functions on the state  (state,action) => state
- */
 
 var initial_state = {
 	// these corrispond to state values 

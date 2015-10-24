@@ -4,10 +4,6 @@ class SignupController {
     constructor($ngRedux, $scope, $auth) {
         this.name = 'signup';
 
-        this.refresh = function() {
-        	$scope.$apply();
-        }
-
         this.authenticate = $auth.authenticate;
 
         this.creds = {
@@ -108,5 +104,7 @@ class SignupController {
     } 
 
 }
+
+SignupController.$inject = ['$ngRedux', '$scope', '$auth'];
 
 export default SignupController;

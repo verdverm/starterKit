@@ -1,7 +1,4 @@
-import {
-    actionCreator, optionsActionCreator
-}
-from 'redux-action-utils';
+import {actionCreator, optionsActionCreator} from 'redux-action-utils';
 
 import routerActions from "./router"
 import PDB from '../pdb'

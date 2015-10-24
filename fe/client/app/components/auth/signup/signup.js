@@ -5,11 +5,11 @@ import ngRedux from 'ng-redux';
 import signupComponent from './signup.component';
 
 let signupModule = angular.module('signup', [
-  uiRouter,
-  ngRedux
+  'ui.router',
+  'ngRedux',
 ])
 
-.config(($stateProvider, $urlRouterProvider) => {
+.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
@@ -24,7 +24,7 @@ let signupModule = angular.module('signup', [
       }
 
     });
-})
+}])
 
 .directive('signup', signupComponent);
 

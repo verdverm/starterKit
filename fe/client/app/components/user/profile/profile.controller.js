@@ -17,7 +17,8 @@ class ProfileController {
             profile: state.profile
         };
     }
-
 }
+
+ProfileController.$inject = ['$ngRedux', '$scope'];
 
 export default ProfileController;

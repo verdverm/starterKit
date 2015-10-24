@@ -5,11 +5,11 @@ import ngRedux from 'ng-redux';
 import <%= name %>Component from './<%= name %>.component';
 
 let <%= name %>Module = angular.module('<%= name %>', [
-  uiRouter,
-  ngRedux
+  'ui.router',
+  'ngRedux',
 ])
 
-.config(($stateProvider) => {
+.config(['$stateProvider', ($stateProvider) => {
   $stateProvider
     .state('<%= name %>', {
       url: '/<%= name %>',
@@ -21,7 +21,7 @@ let <%= name %>Module = angular.module('<%= name %>', [
         }
       }
     });
-})
+}])
 
 .directive('<%= name %>', <%= name %>Component);
 

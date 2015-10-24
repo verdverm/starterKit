@@ -5,11 +5,11 @@ import ngRedux from 'ng-redux';
 import profileComponent from './profile.component';
 
 let profileModule = angular.module('profile', [
-  uiRouter,
-  ngRedux
+  'ui.router',
+  'ngRedux',
 ])
 
-.config(($stateProvider) => {
+.config(['$stateProvider', ($stateProvider) => {
   $stateProvider
     .state('profile', {
       url: '/profile',
@@ -21,7 +21,7 @@ let profileModule = angular.module('profile', [
         }
       }
     });
-})
+}])
 
 .directive('profile', profileComponent);
 

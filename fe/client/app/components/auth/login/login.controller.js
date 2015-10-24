@@ -90,8 +90,8 @@ class LoginController {
           // toastr.error(response.data.message);
         });
     } 
-
-
 }
+
+LoginController.$inject = ['$ngRedux', '$scope', "$auth"];
 
 export default LoginController;

@@ -26,4 +26,6 @@ class AppController {
     }
 }
 
+AppController.$inject = ['$ngRedux', '$scope'];
+
 export default AppController;

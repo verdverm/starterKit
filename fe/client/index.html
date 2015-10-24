@@ -28,7 +28,7 @@
     <base href="/">
 </head>
 
-<body ng-app="app" ng-cloak style="height:100%" class="blue-grey lighten-5">
+<body ng-app="app" ng-cloak ng-strict-di style="height:100%" class="blue-grey lighten-5">
 
     <app>
         <br><br>
@@ -42,7 +42,7 @@
         var jsfiles = [
             "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js",
             "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js",
-            "bundle.js",
+            "bundle.min.js",
         ];
         head.load(jsfiles);
 

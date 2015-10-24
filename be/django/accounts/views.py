@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.response import Response
 from rest_framework import permissions
 
+from django.contrib.auth.models import User
 from accounts.models import UserAccounts
 from accounts.serializers import UserAccountsSerializer
 
@@ -12,7 +13,7 @@ import requests
 import json
 from urlparse import parse_qs, parse_qsl
 
-
+from pprint import pprint
 
 # @api_view(['POST'])
 # @authentication_classes([])
@@ -23,6 +24,7 @@ from urlparse import parse_qs, parse_qsl
 #     unlink_account = ?
 
 
+from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework_jwt.settings import api_settings
 
@@ -44,7 +46,7 @@ def facebook(request):
     access_token_url = 'https://graph.facebook.com/v2.3/oauth/access_token'
     graph_api_url = 'https://graph.facebook.com/v2.3/me'
 
-    print request.data
+    # print request.data
 
     params = {
         'client_id': request.data['clientId'],
@@ -60,74 +62,45 @@ def facebook(request):
     # Step 2. Retrieve information about the current user.
     r = requests.get(graph_api_url, params=access_token)
     profile = json.loads(r.text)
-    profile["token"] = "temp_token"
 
-    current_user = request.user
+    # print "request.user:", request.user
+    # print "request.auth:", request.auth
+    # print "request.jwtuser:", request.jwtuser
+    # print "request.jwtauth:", request.jwtauth
+    profile["token"] = request.jwtauth
+    current_user = request.jwtuser
 
-    create = True
-    account = UserAccount.query.filter_by(facebook=profile['id']).first()
-    if account:
-        create = False
+    user = User.objects.get(pk=current_user.id)
+    if user is None:
+        print "NO USER!!"
+        ### MAKE A NEW USER!!!
 
-    profile["create"] = create
+    print len(params["code"])
+    print len(access_token)
 
-    # # # Step 3. Link account, return account, or create user
-    # if current_user.is_authenticated():
-    #     # Link accounts.
-
-    # else:
-
-    #     if create:
-    #         # Create a new account
-    #         username = profile['id']
-    #         email = 
-    #         password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(16))
-
-    #     else:
-    #         # return an existing account and set authenticated
-    #         profile["token"] = "temp_token"
-
-
-
-
+    if hasattr( user, 'useraccounts' ):
+        print "HAS ACCOUNTS"
+        accounts = user.useraccounts
+        accounts.facebook = access_token
+        accounts.facebook_id = profile["id"]
+        accounts.facebook_name = profile["name"]
+        accounts.save()
+    else:
+        print "NO ACCOUNTS"
+        accounts = UserAccounts()
+        accounts.user = user
+        accounts.facebook = params["code"]
+        accounts.facebook_id = profile["id"]
+        accounts.facebook_name = profile["name"]
+        accounts.save()
+        user.useraccounts = accounts
+        user.save()
+        print user.useraccounts
 
     print profile
     return Response(profile)
 
 
-    # # Step 3. (optional) Link accounts.
-    # if request.headers.get('Authorization'):
-    #     user = User.query.filter_by(facebook=profile['id']).first()
-    #     if user:
-    #         response = jsonify(message='There is already a Facebook account that belongs to you')
-    #         response.status_code = 409
-    #         return response
-
-    #     payload = parse_token(request)
-
-    #     user = User.query.filter_by(id=payload['sub']).first()
-    #     if not user:
-    #         response = jsonify(message='User not found')
-    #         response.status_code = 400
-    #         return response
-
-    #     u = User(facebook=profile['id'], display_name=profile['name'])
-    #     db.session.add(u)
-    #     db.session.commit()
-    #     token = create_token(u)
-    #     return jsonify(token=token)
-
-    # # Step 4. Create a new account or return an existing one.
-    # user = User.query.filter_by(facebook=profile['id']).first()
-    # if user:
-    #     token = create_token(user)
-    #     return jsonify(token=token)
-
-    # u = User(facebook=profile['id'], display_name=profile['name'])
-    # db.session.add(u)
-    # db.session.commit()
-    # token = create_token(u)
-    # return jsonify(token=token)
 
 
 @api_view(['POST'])
@@ -200,13 +173,15 @@ def google(request):
     access_token_url = 'https://accounts.google.com/o/oauth2/token'
     people_api_url = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect'
 
-    payload = dict(client_id=request.json['clientId'],
-                   redirect_uri=request.json['redirectUri'],
-                   client_secret=app.config['GOOGLE_SECRET'],
-                   code=request.json['code'],
-                   grant_type='authorization_code')
+    payload = {
+        'client_id': request.data['clientId'],
+        'redirect_uri': request.data['redirectUri'],
+        'client_secret': settings.GOOGLE_SECRET,
+        'code': request.data['code'],
+        'grant_type': 'authorization_code'
+    }
 
-    # Step 1. Exchange authorization code for access token.
+   # Step 1. Exchange authorization code for access token.
     r = requests.post(access_token_url, data=payload)
     token = json.loads(r.text)
     headers = {'Authorization': 'Bearer {0}'.format(token['access_token'])}
@@ -216,6 +191,43 @@ def google(request):
     profile = json.loads(r.text)
 
     print profile
+
+    # print "request.user:", request.user
+    # print "request.auth:", request.auth
+    # print "request.jwtuser:", request.jwtuser
+    # print "request.jwtauth:", request.jwtauth
+    profile["token"] = request.jwtauth
+    current_user = request.jwtuser
+
+    user = User.objects.get(pk=current_user.id)
+    if user is None:
+        print "NO USER!!"
+        ### MAKE A NEW USER!!!
+
+    # print len(params["code"])
+    # print len(access_token)
+
+    if hasattr( user, 'useraccounts' ):
+        print "HAS ACCOUNTS"
+        # accounts = user.useraccounts
+        # accounts.facebook = access_token
+        # accounts.facebook_id = profile["id"]
+        # accounts.facebook_name = profile["name"]
+        # accounts.save()
+    else:
+        print "NO ACCOUNTS"
+        # accounts = UserAccounts()
+        # accounts.user = user
+        # accounts.facebook = params["code"]
+        # accounts.facebook_id = profile["id"]
+        # accounts.facebook_name = profile["name"]
+        # accounts.save()
+        # user.useraccounts = accounts
+        # user.save()
+        # print user.useraccounts
+
+    print profile
+    return Response(profile)
 
     # user = User.query.filter_by(google=profile['sub']).first()
     # if user:

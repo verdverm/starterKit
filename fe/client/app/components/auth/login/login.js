@@ -5,12 +5,12 @@ import ngRedux from 'ng-redux';
 import loginComponent from './login.component';
 
 let loginModule = angular.module('login', [
-  uiRouter,
-  ngRedux,
+  'ui.router',
+  'ngRedux',
   'satellizer'
 ])
 
-.config(($stateProvider, $urlRouterProvider) => {
+.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
@@ -24,7 +24,7 @@ let loginModule = angular.module('login', [
         }
       }
     });
-})
+}])
 
 .directive('login', loginComponent);
 

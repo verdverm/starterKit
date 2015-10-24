@@ -21,23 +21,6 @@
                 </div>
             </div>
 
-<!--                 <div class="input-field col s12">
-                    <i class="material-icons prefix">vpn_key</i>
-                    <input placeholder="Password" type="password" ng-model="vm.creds.password.value" />
-                    <div class="red-text form-error" ng-show="vm.creds.password.error">
-                        <i class="material-icons">report_problem</i>
-                        <span>{{vm.creds.password.error}}</span>
-                    </div>
-                </div>
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">vpn_key</i>
-                    <input placeholder="Password Confirm" type="password" ng-model="vm.creds.confirm.value" />
-                    <div class="red-text form-error" ng-show="vm.creds.confirm.error">
-                        <i class="material-icons">report_problem</i>
-                        <span>{{vm.creds.confirm.error}}</span>
-                    </div>
-                </div> -->
-
 
             <div class="row center valign-wrapper">
                 <span class="col s5 valign"><hr class="grey" style="height:1px;border:none;"></span>
@@ -46,23 +29,14 @@
             </div>
 
 
-            <div class="row">
-                <a style="background-color:#3b5998;" class="btn col s12" ng-click="vm.tryAuthenticate('facebook')">Link with Facebook</a>
-                <br>
-                <br>
-                <a style="background-color:#dd4b39;" class="btn col s12" ng-click="vm.tryAuthenticate('google')">Link with Google</a>
-                <br>
-                <br>
-                <a style="background-color:#444;" class="btn col s12" ng-click="vm.tryAuthenticate('github')">Link with GitHub</a>
-                <br>
-                <br>
-                <a style="background-color:#007bb6;" class="btn col s12" ng-click="vm.tryAuthenticate('linkedin')">Link with LinkedIn</a>
-                <br>
-                <br>
-                <a style="background-color:#00aced;" class="btn col s12" ng-click="vm.tryAuthenticate('twitter')"> Sign in with Twitter</a>
-                <br>
-                <br>
+            <div class="row"> 
+                <div ng-repeat="provider in vm.providers">
+                    <a ng-hide="vm.accounts.{{provider.name}}" style="background-color:{{provider.color}};" class="btn col offset-s1 s10" ng-click="vm.tryLinking('{{provider.name}}')">Link with {{provider.name}}</a>
+                <a ng-show="vm.accounts.{{provider.name}}" class="btn col offset-s1 s10 grey" ng-click="vm.tryUnlinking('{{provider.name}}')">Unlink {{provider.name}}</a>
+                <br><br>
+                </div>
             </div>
+
         </div>
     </div>
 </div>

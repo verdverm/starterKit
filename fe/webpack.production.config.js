@@ -4,7 +4,7 @@ module.exports = {
     ],
     devtool: 'sourcemap',
     output: {
-        filename: 'bundle.js'
+        filename: 'bundle.min.js'
     },
     module: {
         loaders: [{
