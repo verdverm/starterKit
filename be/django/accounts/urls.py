@@ -9,6 +9,8 @@ urlpatterns = [
 	url(r'^auth/google/', views.google),
 	url(r'^auth/linkedin/', views.linkedin),
 	url(r'^auth/twitter/', views.twitter),
+
+	url(r'^auth/unlink/', views.unlink),
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)

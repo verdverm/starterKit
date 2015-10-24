@@ -1,10 +1,13 @@
 import { signupUser } from '../../../actions/auth'
+import OauthProviders from '../../shared/consts/accounts';
 
 class SignupController {
     constructor($ngRedux, $scope, $auth) {
         this.name = 'signup';
 
         this.authenticate = $auth.authenticate;
+
+        this.providers = OauthProviders;
 
         this.creds = {
             email: {

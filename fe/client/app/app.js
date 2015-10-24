@@ -50,6 +50,8 @@ angular.module('app', [
 
 .config([ '$authProvider', ($authProvider) => {
 
+    $authProvider.unlinkUrl = 'http://localhost:8000/auth/unlink/';
+
     $authProvider.facebook({
         url: 'http://localhost:8000/auth/facebook/',
         clientId: '855012704576907',

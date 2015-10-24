@@ -9,6 +9,7 @@ var initial_state = {
 
 	current: '',
 	linking: false,
+	unlinking: false,
 	error: null
 }
 
@@ -34,6 +35,27 @@ function accounts(state = initial_state, action) {
 				current: '',
 			});
 			obj[action.provider] = true;
+			return obj
+
+
+		case ACCOUNTS.UNLINKING_ACCT_STARTED:
+			return Object.assign({}, state, {
+				unlinking: true,
+				current: action.provider,
+			});
+
+		case ACCOUNTS.UNLINKING_ACCT_FAILURE:
+			return Object.assign({}, state, {
+				unlinking: false,
+				error: action.error
+			});
+
+		case ACCOUNTS.UNLINKING_ACCT_SUCCESS:
+			var obj = Object.assign({}, state, {
+				unlinking: false,
+				current: '',
+			});
+			obj[action.provider] = false;
 			return obj
 
 

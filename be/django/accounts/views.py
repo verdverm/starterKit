@@ -15,18 +15,10 @@ from urlparse import parse_qs, parse_qsl
 
 from pprint import pprint
 
-# @api_view(['POST'])
-# @authentication_classes([])
-# @permission_classes([])
-# @throttle_classes([])
-# def unlink(request):
-#     current_user = request.user
-#     unlink_account = ?
-
-
 from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework_jwt.settings import api_settings
+
 
 def gen_jwt_token(user):
     jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -35,6 +27,19 @@ def gen_jwt_token(user):
     payload = jwt_payload_handler(user)
     token = jwt_encode_handler(payload)
     return token
+
+
+
+@api_view(['POST'])
+@authentication_classes([])
+@permission_classes([])
+@throttle_classes([])
+def unlink(request):
+    print request.data
+
+    return Response("success")
+
+
 
 
 

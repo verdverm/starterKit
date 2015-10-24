@@ -1,5 +1,5 @@
-import * as AccountActions from '../../../actions/accounts'
-
+import * as AccountActions from '../../../actions/accounts';
+import OauthProviders from '../../shared/consts/accounts';
 
 class AccountController {
     constructor($ngRedux, $scope, $auth) {
@@ -7,40 +7,7 @@ class AccountController {
 
         this.authenticate = $auth.authenticate;
 
-        this.providers = [
-            {
-                name: "facebook",
-                color: "#3b5998",
-            },
-            {
-                name: "google",
-                color: "#dd4b39",
-            },
-            {
-                name: "yahoo",
-                color: "#6e2a85",
-            },
-            {
-                name: "github",
-                color: "#444",
-            },
-            {
-                name: "twitter",
-                color: "#00aced",
-            },
-            {
-                name: "soundcloud",
-                color: "#fe3801",
-            },
-            {
-                name: "spotify",
-                color: "#7bb342",
-            },
-            {
-                name: "dropbox",
-                color: "#007ee5"
-            }
-        ];
+        this.providers = OauthProviders;
 
 
         let unsubscribe = $ngRedux.connect(

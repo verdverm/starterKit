@@ -1,11 +1,14 @@
 import {loginUser} from '../../../actions/auth'
 import routerActions from '../../../actions/router'
+import OauthProviders from '../../shared/consts/accounts';
 
 class LoginController {
     constructor($ngRedux, $scope, $auth) {
         this.name = 'login';
 
         this.authenticate = $auth.authenticate;
+
+        this.providers = OauthProviders;
 
         this.creds = {
             username: {
