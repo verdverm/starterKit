@@ -23,16 +23,21 @@
 
 
             <div class="row center valign-wrapper">
-                <span class="col s5 valign"><hr class="grey" style="height:1px;border:none;"></span>
-                <span class="col s2">also</span>
-                <span class="col s5 valign"><hr class="grey" style="height:1px;border:none;"></span>
+                <span class="col s4 valign"><hr class="grey" style="height:1px;border:none;"></span>
+                <span class="col s4">linked with</span>
+                <span class="col s4 valign"><hr class="grey" style="height:1px;border:none;"></span>
             </div>
+
+            <div class="row center" ng-show="vm.accounts.linking || vm.accounts.unlinking">
+                <spinner></spinner>
+            </div>
+
 
 
             <div class="row"> 
                 <div ng-repeat="provider in vm.providers">
-                    <a ng-hide="vm.accounts.{{provider.name}}" style="background-color:{{provider.color}};" class="btn col offset-s1 s10" ng-click="vm.tryLinking('{{provider.name}}')">Link with {{provider.name}}</a>
-                <a ng-show="vm.accounts.{{provider.name}}" class="btn col offset-s1 s10 grey" ng-click="vm.tryUnlinking('{{provider.name}}')">Unlink {{provider.name}}</a>
+                    <a ng-hide="vm.linkedTo.{{provider.name}}" style="background-color:{{provider.color}};" class="btn col offset-s1 s10" ng-click="vm.tryLinking('{{provider.name}}')">Link with {{provider.name}}</a>
+                <a ng-show="vm.linkedTo.{{provider.name}}" class="btn col offset-s1 s10 grey" ng-click="vm.tryUnlinking('{{provider.name}}')">Unlink {{provider.name}}</a>
                 <br><br>
                 </div>
             </div>

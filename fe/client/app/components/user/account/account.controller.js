@@ -17,12 +17,15 @@ class AccountController {
 
         $scope.$on('$destroy', unsubscribe);
 
+        this.loadServerAccounts();
+
     }
 
     mapStateToThis(state) {
         return {
             authState: state.auth,
             accounts: state.accounts,
+            linkedTo: state.accounts.providers,
         };
     }
 

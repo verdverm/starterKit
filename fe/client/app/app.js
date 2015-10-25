@@ -63,20 +63,45 @@ angular.module('app', [
         clientId: '87612612394-3uq02vaa8drdkmsoeu43c8hrfq665oin.apps.googleusercontent.com'
     });
 
-    $authProvider.github({
-        url: 'http://localhost:8000/auth/github/',
-        clientId: 'GitHub Client ID'
+    $authProvider.yahoo({
+        url: 'http://localhost:8000/auth/yahoo/',
+        clientId: 'dj0yJmk9YWV2d29JV0pqTTFQJmQ9WVdrOVJIcHZXWGhhTXpnbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1kMQ--'
     });
 
-    $authProvider.linkedin({
-        url: 'http://localhost:8000/auth/linkedin/',
-        clientId: 'LinkedIn Client ID'
+    $authProvider.live({
+        url: 'http://localhost:8000/auth/live/',
+        clientId: '0000000040171657'
+    });
+
+    $authProvider.github({
+        url: 'http://localhost:8000/auth/github/',
+        clientId: '3fada513950ed4e6ff33'
     });
 
     $authProvider.twitter({
         url: 'http://localhost:8000/auth/twitter/',
-        clientId: 'Twitter Client ID'
+        authorizationEndpoint: 'https://api.twitter.com/oauth/authenticate',
+        clientId: 'Iu6ayoCk6vrhsrApRKhqgkLxh',
+
     });
+
+    $authProvider.oauth2({
+      name: 'soundcloud',
+      url: 'http://localhost:8000/auth/soundcloud/',
+      clientId: '',
+      redirectUri: window.location.origin,
+      authorizationEndpoint: '',
+    });
+
+    $authProvider.oauth2({
+      name: 'dropbox',
+      url: 'http://localhost:8000/auth/dropbox/',
+      clientId: 'imgx7onhqe5b4wp',
+      redirectUri: window.location.origin,
+      authorizationEndpoint: 'https://www.dropbox.com/1/oauth2/authorize',
+    });
+
+
 }])
 
 .run([ 'Permission', '$ngRedux', '$rootScope', '$state', '$location', '$http', '$auth', 

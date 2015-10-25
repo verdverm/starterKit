@@ -10,6 +10,9 @@ let OauthProviders = [{
     name: "yahoo",
     color: "#6e2a85",
 }, {
+    name: "windows",
+    color: "#00BDF6",
+}, {
     name: "github",
     color: "#444",
 }, {
@@ -17,10 +20,7 @@ let OauthProviders = [{
     color: "#00aced",
 }, {
     name: "soundcloud",
-    color: "#fe3801",
-}, {
-    name: "spotify",
-    color: "#7bb342",
+    color: "pink",
 }, {
     name: "dropbox",
     color: "#007ee5"

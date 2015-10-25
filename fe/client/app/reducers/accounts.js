@@ -4,13 +4,26 @@ import * as ACCOUNTS from '../actions/accounts';
 
 
 var initial_state = {
-	facebook: false,
-	google: false,
-
-	current: '',
 	linking: false,
 	unlinking: false,
-	error: null
+	retrieving: false,
+	loading: false,
+	saving: false,
+	deleting: false,
+
+	current: '',
+	error: null,
+
+	providers: {
+		facebook: false,
+		google: false,
+		yahoo: false,
+		github: false,
+		twitter: false,
+		soundcloud: false,
+		spotify: false,
+		dropbox: false,
+	},
 }
 
 
@@ -34,7 +47,7 @@ function accounts(state = initial_state, action) {
 				linking: false,
 				current: '',
 			});
-			obj[action.provider] = true;
+			obj.providers[action.provider] = true;
 			return obj
 
 
@@ -55,10 +68,85 @@ function accounts(state = initial_state, action) {
 				unlinking: false,
 				current: '',
 			});
-			obj[action.provider] = false;
+			obj.providers[action.provider] = false;
 			return obj
 
 
+
+		case ACCOUNTS.LOAD_SERVER_ACCOUNTS_STARTED:
+			return Object.assign({}, state, {
+				retrieving: true,
+			});
+
+		case ACCOUNTS.LOAD_SERVER_ACCOUNTS_FAILURE:
+			return Object.assign({}, state, {
+				retrieving: false,
+				error: action.error
+			});
+
+		case ACCOUNTS.LOAD_SERVER_ACCOUNTS_SUCCESS:
+			var obj = Object.assign({}, state, {
+				retrieving: false,
+			});
+			for (var provider in action.providers) {
+				console.log("Linked to", provider, action.providers[provider])
+				obj.providers[provider] = action.providers[provider];
+			};
+
+
+
+		case ACCOUNTS.LOAD_ACCOUNT_STARTED:
+			return Object.assign({}, state, {
+				loading: true,
+			});
+
+		case ACCOUNTS.LOAD_ACCOUNT_FAILURE:
+			return Object.assign({}, state, {
+				loading: false,
+				error: action.error,
+			});
+
+		case ACCOUNTS.LOAD_ACCOUNT_SUCCESS:
+			return Object.assign({}, state, {
+				loading: false,
+				providers: action.providers,
+			});
+
+
+
+		case ACCOUNTS.SAVE_ACCOUNT_STARTED:
+			return Object.assign({}, state, {
+				saving: true,
+			});
+
+		case ACCOUNTS.SAVE_ACCOUNT_FAILURE:
+			return Object.assign({}, state, {
+				saving: false,
+				error: action.error
+			});
+
+		case ACCOUNTS.SAVE_ACCOUNT_SUCCESS:
+			return Object.assign({}, state, {
+				saving: false,
+			});
+
+
+
+		case ACCOUNTS.DELETE_ACCOUNT_STARTED:
+			return Object.assign({}, state, {
+				deleting: true,
+			});
+
+		case ACCOUNTS.DELETE_ACCOUNT_FAILURE:
+			return Object.assign({}, state, {
+				deleting: false,
+				error: action.error
+			});
+
+		case ACCOUNTS.DELETE_ACCOUNT_SUCCESS:
+			return Object.assign({}, state, {
+				deleting: false,
+			});
 
 
 

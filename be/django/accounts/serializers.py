@@ -5,4 +5,14 @@ from accounts.models import UserAccounts
 class UserAccountsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = UserAccounts
-        fields = ('url', 'facebook', 'google', 'github', 'linkedin', 'twitter')
+        fields = (
+        	'facebook', 
+        	'google', 
+        	'yahoo', 
+        	'windows', 
+        	'github', 
+        	'twitter',
+        	'soundcloud',
+        	'dropbox',
+        	)
+

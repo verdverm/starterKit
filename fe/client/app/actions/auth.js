@@ -100,7 +100,7 @@ export const tokenTestFailure = actionCreator(TOKEN_TEST_FAILURE, 'error');
 export const tokenTestSuccess = actionCreator(TOKEN_TEST_SUCCESS, 'passed');
 export function tokenTest(token) {
     return function(dispatch) {
-        dispatch(loginUserStarted());
+        dispatch(testTokenStarted());
 
         var payload = {
             token

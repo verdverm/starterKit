@@ -24,10 +24,8 @@ urlpatterns = [
     url(r'^', include('todos.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     url(r'^auth/', include('rest_auth.urls')),
-    url(r'^auth/registration/', include('rest_auth.registration.urls')),
     url(r'^', include('accounts.urls')),
 
     url(r'^token-auth/', 'rest_framework_jwt.views.obtain_jwt_token'),
