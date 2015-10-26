@@ -141,14 +141,16 @@ CORS_ALLOW_HEADERS = (
 
 MIDDLEWARE_CLASSES = (
     'corsheaders.middleware.CorsMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
 
-    'app.middleware.AuthenticationMiddlewareJWT',
 
-    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'app.middleware.AuthenticationMiddlewareJWT',
+    
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    
 
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

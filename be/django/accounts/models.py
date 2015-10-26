@@ -18,10 +18,9 @@ class UserAccounts(models.Model):
     soundcloud = models.BooleanField(default=False)
     dropbox    = models.BooleanField(default=False)
 
-    facebook_code  = models.CharField(max_length=64, blank=True, default='')
+    facebook_code  = models.CharField(max_length=512, blank=True, default='')
     facebook_token = models.CharField(max_length=512, blank=True, default='')
     facebook_id    = models.CharField(max_length=120, blank=True, default='')
-    facebook_code  = models.CharField(max_length=120, blank=True, default='')
     fackbook_email = models.CharField(max_length=120, blank=True, default='')
     fackbook_name  = models.CharField(max_length=120, blank=True, default='')
 

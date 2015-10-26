@@ -9,3 +9,5 @@ django-cors-headers
 aldjemy
 werkzeug
 psycopg2
+requests
+requests_oauthlib

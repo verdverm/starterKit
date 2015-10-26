@@ -126,7 +126,10 @@ def facebook(request):
     access_token_url = 'https://graph.facebook.com/v2.3/oauth/access_token'
     graph_api_url = 'https://graph.facebook.com/v2.3/me'
 
-    # print request.data
+    print "request.user:", request.user
+    print "request.auth:", request.auth
+    print "request.jwtuser:", request.jwtuser
+    print "request.jwtauth:", request.jwtauth
 
     params = {
         'client_id': request.data['clientId'],
@@ -143,17 +146,11 @@ def facebook(request):
     r = requests.get(graph_api_url, params=access_token)
     profile = json.loads(r.text)
 
-
-    profile["token"] = request.jwtauth
     current_user = request.jwtuser
-
     user = User.objects.get(pk=current_user.id)
     if user is None:
         print "NO USER!!"
         ### MAKE A NEW USER!!!
-
-    # print len(params["code"])
-    # print len(access_token)
 
     if hasattr( user, 'useraccounts' ):
         print "HAS ACCOUNTS"
@@ -178,7 +175,8 @@ def facebook(request):
         user.save()
         print user.useraccounts
 
-    print profile
+    profile["token"] = request.jwtauth
+    pprint(profile)
     return Response(profile)
 
 
@@ -209,18 +207,12 @@ def google(request):
     r = requests.get(people_api_url, headers=headers)
     profile = json.loads(r.text)
 
-    print profile
-
-    profile["token"] = request.jwtauth
     current_user = request.jwtuser
 
     user = User.objects.get(pk=current_user.id)
     if user is None:
         print "NO USER!!"
         ### MAKE A NEW USER!!!
-
-    # print len(params["code"])
-    # print len(access_token)
 
     if hasattr( user, 'useraccounts' ):
         print "HAS ACCOUNTS"
@@ -247,7 +239,8 @@ def google(request):
         user.save()
         print user.useraccounts
 
-    print profile
+    profile["token"] = request.jwtauth
+    pprint(profile)
     return Response(profile)
 
 
@@ -383,7 +376,7 @@ def windows(request):
         print user.useraccounts
 
     profile["token"] = request.jwtauth
-    print profile
+    pprint(profile)
     return Response(profile)
 
 
@@ -415,7 +408,6 @@ def github(request):
     profile = json.loads(r.text)
 
 
-    profile["token"] = request.jwtauth
     current_user = request.jwtuser
 
     user = User.objects.get(pk=current_user.id)
@@ -450,6 +442,7 @@ def github(request):
         user.save()
         print user.useraccounts
 
+    profile["token"] = request.jwtauth
     pprint(profile)
     return Response(profile)
 
@@ -474,8 +467,6 @@ def twitter(request):
                       verifier=request.data.get('oauth_verifier'))
         r = requests.post(access_token_url, auth=auth)
         profile = dict(parse_qsl(r.text))
-        print "PROFILE:"
-        pprint(profile)
 
         current_user = request.jwtuser
 
@@ -556,19 +547,12 @@ def dropbox(request):
 
     # Step 1. Exchange authorization code for access token.
     r = requests.post(access_token_url, params=params)
-    print "TOKEN: ", r.text
     access_token = json.loads(r.text)
-    pprint(access_token)
-    print len(access_token['access_token'])
-
     headers = {'Authorization': 'Bearer {0}'.format(access_token['access_token'])}
 
     # # Step 2. Retrieve information about the current user.
     r = requests.get(profile_api_url, headers=headers)
     profile = json.loads(r.text)
-    print "PROFILE: "
-    pprint(profile)
-
 
     current_user = request.jwtuser
 
@@ -604,5 +588,5 @@ def dropbox(request):
         print user.useraccounts
 
     profile["token"] = request.jwtauth
-    print profile
+    pprint(profile)
     return Response(profile)

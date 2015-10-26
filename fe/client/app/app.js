@@ -126,17 +126,13 @@ angular.module('app', [
         if (token !== "" && $http.defaults.headers.common.Authorization === undefined) {
             console.log("Setting HTTP token to: ", token)
             $http.defaults.headers.common.Authorization = "Bearer " + token;
+            console.log("Setting AUTH token to: ", token)
+            $auth.setToken(token);
         } else if (token === "" && $http.defaults.headers.common.Authorization !== undefined) {
             console.log("Deleting HTTP token")
             delete $http.defaults.headers.common.Authorization;
         }
-        // if (token !== "" && $auth.getToken() !== token) {
-        //     console.log("Setting AUTH token to: ", token)
-        //     $auth.setToken(token);
-        // } else if (token === "" && $auth.getToken()) {
-        //     console.log("Deleting AUTH token")
-        //     delete $auth.removeToken();
-        // }
+
     })
 
 
